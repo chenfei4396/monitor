@@ -12,6 +12,8 @@
         <div class="content" style="width:600px;height:600px;word-wrap: break-word;background-color: gray;">
             <button onclick="errorClick()">点击抛出JS错误</button>
             <button onclick="promiseErrorClick()">点击抛出Promise错误</button>
+            <button onclick="sendSuccess()">ajax成功</button>
+            <button onclick="sendFail()">ajax失败</button>
             <button id="clickBtn" onclick="clickMe()">点我</button>
         </div>
     </div>
@@ -30,6 +32,28 @@
             let start = Date.now();
             while ((Date.now() - start) < 1000) { }
         }
+
+        function sendSuccess() {
+            let xhr = new XMLHttpRequest;
+            xhr.open('GET', '/success', true);
+            xhr.responseType = 'json';
+            xhr.onload = function () {
+                console.log(xhr.response);
+            }
+            xhr.send()
+        }
+
+
+        function sendFail() {
+            let xhr = new XMLHttpRequest;
+            xhr.open('POST', '/error', true);
+            xhr.responseType = 'json';
+            xhr.onload = function () {
+                console.log(xhr.response);
+            }
+            xhr.send()
+        }
+
 
         // setTimeout(() => {
         //     let content = document.getElementsByClassName('content')[0];
